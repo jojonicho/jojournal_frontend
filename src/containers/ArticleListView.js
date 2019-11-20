@@ -10,7 +10,6 @@ class ArticleList extends React.Component {
         articles: []
     }
     componentDidMount() {
-        const axios = require('axios');
         const promise = axios.get('https://jojonicho-django-react-blog.herokuapp.com/api/');
         promise.then(res => {
             this.setState({
@@ -25,7 +24,6 @@ class ArticleList extends React.Component {
         //         "Content-type": "application/json",
         //         Authorization: newProps.token
         //     }
-        const axios = require('axios');
         const promise = axios.get('https://jojonicho-django-react-blog.herokuapp.com/api/');
         promise.then(res => {
             this.setState({
