@@ -62,4 +62,4 @@ const mapStateToProps = state => {
         token: state.token
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
+export default connect(mapStateToProps)(ArticleList);
