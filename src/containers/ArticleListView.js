@@ -2,36 +2,54 @@ import React from 'react';
 import axios from 'axios';
 import CustomForm from '../components/Form';
 import { connect } from 'react-redux';
-import * as actions from '../store/actions/auth';
 import Articles from '../components/Article';
 
 class ArticleList extends React.Component {
     state = {
         articles: []
     }
-    componentDidMount() {
-        const promise = axios.get('https://jojonicho-django-react-blog.herokuapp.com/api/');
-        promise.then(res => {
+
+    fetchArticles = () => {
+        axios.get("https://jojonicho-django-react-blog.herokuapp.com/api/").then(res => {
             this.setState({
-                articles: res.data,
+                articles: res.data
             });
-        })
+        });
     }
 
-    componentWillReceiveProps() {
-        // if (newProps.token) {
-        //     axios.defaults.headers = {
-        //         "Content-type": "application/json",
-        //         Authorization: newProps.token
-        //     }
-        const promise = axios.get('https://jojonicho-django-react-blog.herokuapp.com/api/');
-        promise.then(res => {
-            this.setState({
-                articles: res.data,
-            });
-        })
-        // }
+    componentDidMount() {
+        this.fetchArticles();
     }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.token) {
+            this.fetchArticles();
+        }
+    }
+
+    // componentDidMount() {
+    //     const promise = axios.get('https://jojonicho-django-react-blog.herokuapp.com/api/');
+    //     promise.then(res => {
+    //         this.setState({
+    //             articles: res.data,
+    //         });
+    //     })
+    // }
+
+    // componentWillReceiveProps() {
+    //     // if (newProps.token) {
+    //     //     axios.defaults.headers = {
+    //     //         "Content-type": "application/json",
+    //     //         Authorization: newProps.token
+    //     //     }
+    //     const promise = axios.get('https://jojonicho-django-react-blog.herokuapp.com/api/');
+    //     promise.then(res => {
+    //         this.setState({
+    //             articles: res.data,
+    //         });
+    //     })
+    //     // }
+    // }
 
     render() {
         return (
